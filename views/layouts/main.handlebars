@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+      <body>
+    {{#if flash}}
+      <div>
+        <strong>{{flash.intro}}</strong> {{{flash.message}}}
+      </div>
+    {{/if}}
+    
+    {{!-- {{#if currentUser}}
+      <p>
+        <a href="/users/profile">
+        Welcome {{this.currentUser.name}}
+         </a>
+      </p>
+      <p>
+        <form action="/users/logout" role="form" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+          <button type="submit" class="btn">Logout</button>
+        </form>
+      </p>
+    {{else}}
+      <li>
+        <a href="/users/register">Register</a>
+      </li>
+      <li>
+        <a href="/users/login">Login</a>
+      </li>
+    {{/if}} --}}
+
+    {{!-- <nav>
+      <ul>
+        <li><a href="/">BookedIn home</a></li>
+        <li><a href="/authors">Authors</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="/genres">Genres</a></li>
+      </ul>
+    </nav> --}}
+    {{{body}}}
+  </body>
+</html>
