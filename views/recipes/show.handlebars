@@ -1,12 +1,25 @@
 <h1>{{recipe.recipeName}}</h1>
 {{!-- if category add category --}}
 <p>Time: {{#each timeTaken}} {{this}} {{@key}}{{#unless @last}}, {{/unless}}{{/each}}</p>
-{{log recipe.instructions}}
-{{!-- if ingredients add ingredients --}}
 <div>
+{{#if recipe.ingredients}}
+<h3>Ingredients:</h3>
+{{#each recipe.ingredients}}
+{{log this}}
+<li>
+    {{this.measurement}} {{this.ingredient}}
+</li>
+{{/each}}
+</div>
+{{/if}}
+
+<div>
+<h3>Steps:</h3>
 <pre>
 {{{recipe.instructions}}}
 </pre>
-
 </div>
+
+
+
 

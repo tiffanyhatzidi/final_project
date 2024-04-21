@@ -7,9 +7,10 @@ const csrf = require('csurf')
 const indexRouter = require('./routes/index');
 const ingredientsRouter = require('./routes/ingredients');
 const recipesRouter = require('./routes/recipes');
+const ingredientRecipeRouter = require('./routes/ingredients_recipes');
 
 const app = express()
-const port = 8080
+const port = 8081
 
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
@@ -74,6 +75,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/ingredients', ingredientsRouter);
 app.use('/recipes', recipesRouter);
+app.use('/ingredients_recipes', ingredientRecipeRouter);
 
 
 // custom 404 page

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const recipe = require('../models/recipe');
+const ingredientRecipe = require('../models/ingredient_recipe');
+const ingredient = require('../models/ingredient');
 
 
 
@@ -18,8 +20,8 @@ router.get('/show/:id', async (req, res, next) => {
         recipe: recipes,
         timeTaken: recipes.timeTaken,
         recipeId: req.params.id
-        //category?
     }
+    recipes.ingredients = await ingredientRecipe.get(recipes);
     console.log("=========");
     console.log(templateVars);
     res.render('recipes/show', templateVars);
