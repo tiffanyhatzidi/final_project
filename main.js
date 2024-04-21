@@ -8,6 +8,8 @@ const indexRouter = require('./routes/index');
 const ingredientsRouter = require('./routes/ingredients');
 const recipesRouter = require('./routes/recipes');
 const ingredientRecipeRouter = require('./routes/ingredients_recipes');
+const usersRouter = require('./routes/users');
+const recipeUserRouter = require('./routes/recipes_users');
 
 const app = express()
 const port = 8081
@@ -76,6 +78,8 @@ app.use('/', indexRouter);
 app.use('/ingredients', ingredientsRouter);
 app.use('/recipes', recipesRouter);
 app.use('/ingredients_recipes', ingredientRecipeRouter);
+app.use('/users', usersRouter);
+app.use('/recipes_users', recipeUserRouter);
 
 
 // custom 404 page

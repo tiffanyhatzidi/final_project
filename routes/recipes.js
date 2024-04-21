@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const recipe = require('../models/recipe');
 const ingredientRecipe = require('../models/ingredient_recipe');
+const recipeUser = require('../models/recipe_user');
 const ingredient = require('../models/ingredient');
 
 
@@ -22,6 +23,10 @@ router.get('/show/:id', async (req, res, next) => {
         recipeId: req.params.id
     }
     recipes.ingredients = await ingredientRecipe.get(recipes);
+
+    if(req.session.currentUser) {
+        templateVars['recipeUser'] = await recipeUser.get(req.session.currentUser, recipes);
+    }
     console.log("=========");
     console.log(templateVars);
     res.render('recipes/show', templateVars);

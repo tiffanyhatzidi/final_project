@@ -1,0 +1,8 @@
+<h1>{{currentUser.name}}</h1>
+
+My Favorite Recipes:
+<ul>
+  {{#each recipesUsers}}
+    <li><a href="/recipes/show/{{this.id}}">{{this.recipeName}}</a></li>
+  {{/each}}
+</ul>

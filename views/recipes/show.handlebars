@@ -1,17 +1,21 @@
 <h1>{{recipe.recipeName}}</h1>
-{{!-- if category add category --}}
+
+{{#if recipe.category}}
+<p>Category: {{recipe.category}}</p>
+{{/if}}
+
 <p>Time: {{#each timeTaken}} {{this}} {{@key}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+
 <div>
 {{#if recipe.ingredients}}
 <h3>Ingredients:</h3>
 {{#each recipe.ingredients}}
-{{log this}}
 <li>
     {{this.measurement}} {{this.ingredient}}
 </li>
 {{/each}}
-</div>
 {{/if}}
+</div>
 
 <div>
 <h3>Steps:</h3>
@@ -19,6 +23,22 @@
 {{{recipe.instructions}}}
 </pre>
 </div>
+
+{{#if currentUser}}
+<div>
+    <form action="/recipes_users/upsert" role="form" method="post">
+    <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+    <input type="hidden" name="recipeId" value="{{recipe.id}}">
+    <input type="hidden" name="userId" value="{{currentUser.id}}">
+    {{#if recipeUser}}
+        <input type="hidden" name="id" value="{{recipeUser.id}}">
+        <button type="submit">UnSave Recipe</button>
+    {{else}}
+        <button type="submit">Save Recipe</button>
+    {{/if}}
+    </form>
+</div>
+{{/if}}
 
 
 
