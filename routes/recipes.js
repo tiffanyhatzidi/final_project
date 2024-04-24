@@ -12,7 +12,41 @@ router.get('/', async(req, res, next) => {
     res.render('recipes/index', {title: 'HalfBaked || Recipes', recipes: recipes});
 });
 
-//TODO: get.form, post.upsert, get.edit
+//TODO: get.edit
+
+router.get('/form', async (req, res, next) => {
+    let recipeId = req.query.id;
+    res.render('recipes/form',
+        {title: 'HalfBaked || Recipes', 
+        recipeId: recipeId,
+        ingredients: await ingredient.all()});
+});
+
+router.post('/upsert', async (req, res, next) => {
+    console.log('upsert body: ' + JSON.stringify(req.body))
+    //transaction?
+    //CHANGE REQ>BODY!!!!
+    await recipe.upsert(req.body);
+    //await ingredient.upsert(req.body);
+    //await ingredientRecipe.upsert(req.body);
+    let createdOrupdated = req.body.id ? 'updated' : 'created';
+    req.session.flash = {
+      type: 'info',
+      intro: 'Success!',
+      message: `the Recipe has been ${createdOrupdated}!`,
+    };
+    res.redirect(303, '/recipes')
+})
+
+router.get('/edit', async(req, res, next) => {
+    let recipeId = req.query.id;
+    //TODO: if recipe, recipe.
+    //let recipe = await recipe.get(recipeId);
+    //TODO: get ingredients
+    res.render('recipes/form', 
+        {title: 'HalfBaked || Recipes',
+        recipeId: recipeId})
+})
 
 router.get('/show/:id', async (req, res, next) => {
     const recipes = await recipe.get(req.params.id)

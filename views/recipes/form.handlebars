@@ -1,0 +1,30 @@
+<form action="/recipes/upsert" role="form" method="post">
+    <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+    <div>
+        <label for="recipe_name">Recipe</label>
+        <input type="text" id="recipe_name" name="recipe_name">
+    </div>
+    <div>
+        <label for="time_taken">Time</label>
+        <input type="text" id="time_taken" name="time_taken">
+    </div>
+    <div>
+        <label for="category">Category</label>
+        <select name="category" multiple id="category">
+            <option disabled value>-- Select Category --</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Drink">Drink</option>
+        </select>
+    </div>
+    <div>
+        <label for="instructions">Instructions</label>
+        <textarea id="instructions" name="instructions" rows="7" cols="50">
+            Add instructions here
+        </textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
