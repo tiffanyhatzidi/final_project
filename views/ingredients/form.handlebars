@@ -1,0 +1,13 @@
+<form action="/ingredients/upsert" role="form" method="post">
+  <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+  {{#if ingredient}}
+    <div>
+        <input type="hidden" name="id" value="{{ingredient.id}}">
+    </div>
+  {{/if}}
+  <div>
+    <label for="ingredient">ingredient</label>
+    <input type="text" id="ingredient" name="ingredient"{{#if ingredient}}value="{{ingredient.ingredient}}"{{/if}}>
+  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

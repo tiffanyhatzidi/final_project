@@ -19,10 +19,10 @@ exports.update = async (ingredient, id) => {
 }
 
 exports.upsert = async (ingredient) => {
-    if(ingredients.id) {
-        return exports.update(ingredients.ingredient, ingredients.id)
+    if(ingredient.id) {
+        return exports.update(ingredient.ingredient, ingredient.id)
     }
-    return exports.create(ingredients.ingredient)
+    return exports.create(ingredient.ingredient)
 }
 
 /*get for recipe, wait for recipe

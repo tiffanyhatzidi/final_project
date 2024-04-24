@@ -12,7 +12,6 @@ router.get('/', async(req, res, next) => {
     res.render('recipes/index', {title: 'HalfBaked || Recipes', recipes: recipes});
 });
 
-//TODO: get.edit
 
 router.get('/form', async (req, res, next) => {
     let recipeId = req.query.id;
@@ -25,7 +24,15 @@ router.get('/form', async (req, res, next) => {
 router.post('/upsert', async (req, res, next) => {
     console.log('upsert body: ' + JSON.stringify(req.body))
     //transaction?
-    //CHANGE REQ>BODY!!!!
+    // let recipeBody = {
+    //     recipe_name:req.body.recipe_name,
+    //     time_taken: req.body.time_taken,
+    //     category: req.body.category,
+    //     instructions: req.body.instructions
+    // }
+    // let ingredientsBody = {
+    //     ??
+    // }
     await recipe.upsert(req.body);
     //await ingredient.upsert(req.body);
     //await ingredientRecipe.upsert(req.body);
