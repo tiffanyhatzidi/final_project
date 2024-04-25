@@ -1,12 +1,15 @@
 <form action="/recipes/upsert" role="form" method="post">
     <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+    {{#if recipe}}
+        <input type="hidden" name="id" value="{{recipe.id}}">
+    {{/if}}
     <div>
         <label for="recipe_name">Recipe</label>
-        <input type="text" id="recipe_name" name="recipe_name">
+        <input type="text" id="recipe_name" name="recipeName"{{#if recipe}}value="{{recipe.recipeName}}"{{/if}}>
     </div>
     <div>
-        <label for="time_taken">Time</label>
-        <input type="text" id="time_taken" name="time_taken">
+        <label for="time_taken">minutes:</label>
+        <input id="time_taken" type="number" name="timeTaken" value={{timeTaken.minutes}}>
     </div>
     <div>
         <label for="category">Category</label>
@@ -22,9 +25,22 @@
     </div>
     <div>
         <label for="instructions">Instructions</label>
-        <textarea id="instructions" name="instructions" rows="7" cols="50">
-            Add instructions here
-        </textarea>
+        <textarea id="instructions" name="instructions" rows="7" cols="50">{{#if recipe.instructions}}{{recipe.instructions}}{{/if}}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Go To Ingredients</button>
 </form>
+
+{{!-- if recipe
+    each Ingredients
+        <li>{{this.name}} {{this.quantity}}</li>
+    /each
+    <form method="post" action="/ingedient_recipy/upsert">
+        <select>
+            each ingredient
+            <option value=""></option>
+        </select>
+        <input type="hidden" name="reciprt id">
+        <input type="number" name="measurement">
+        <input type="submit">
+    </form>
+\if --}}

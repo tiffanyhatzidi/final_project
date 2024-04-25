@@ -4,7 +4,7 @@
 <p>Category: {{recipe.category}}</p>
 {{/if}}
 
-<p>Time: {{#each timeTaken}} {{this}} {{@key}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+<p>Time:{{#each recipe.timeTaken}} {{this}} {{@key}}{{#unless @last}}, {{/unless}}{{/each}}</p>
 
 <div>
 {{#if recipe.ingredients}}

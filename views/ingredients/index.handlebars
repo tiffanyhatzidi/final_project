@@ -2,6 +2,6 @@
 <a href="/ingredients/form">Add a new ingredient</a>
 {{#each ingredients}}
 <li>
-    {{this.id}}: {{this.ingredient}}
+    {{this.id}}: {{this.ingredient}} <a href="/ingredients/form?id={{this.id}}">edit</a>
 </li>
 {{/each}}

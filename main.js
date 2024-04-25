@@ -12,7 +12,7 @@ const usersRouter = require('./routes/users');
 const recipeUserRouter = require('./routes/recipes_users');
 
 const app = express()
-const port = 8081
+const port = 8080
 
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')

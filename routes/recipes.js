@@ -4,6 +4,7 @@ const recipe = require('../models/recipe');
 const ingredientRecipe = require('../models/ingredient_recipe');
 const recipeUser = require('../models/recipe_user');
 const ingredient = require('../models/ingredient');
+// const { times } = require('lodash');
 
 
 
@@ -23,10 +24,9 @@ router.get('/form', async (req, res, next) => {
 
 router.post('/upsert', async (req, res, next) => {
     console.log('upsert body: ' + JSON.stringify(req.body))
-    //transaction?
     // let recipeBody = {
     //     recipe_name:req.body.recipe_name,
-    //     time_taken: req.body.time_taken,
+    //     time_taken: req.body.timeTaken,
     //     category: req.body.category,
     //     instructions: req.body.instructions
     // }
@@ -42,17 +42,19 @@ router.post('/upsert', async (req, res, next) => {
       intro: 'Success!',
       message: `the Recipe has been ${createdOrupdated}!`,
     };
-    res.redirect(303, '/recipes')
+    res.redirect(303, `/ingredients_recipes/form?id=${req.body.id}`)
 })
 
 router.get('/edit', async(req, res, next) => {
     let recipeId = req.query.id;
     //TODO: if recipe, recipe.
-    //let recipe = await recipe.get(recipeId);
+    let recipe_ = await recipe.get(recipeId);
     //TODO: get ingredients
     res.render('recipes/form', 
         {title: 'HalfBaked || Recipes',
-        recipeId: recipeId})
+        recipeId: recipeId,
+        recipe: recipe_,
+        timeTaken: recipe_.timeTaken})
 })
 
 router.get('/show/:id', async (req, res, next) => {

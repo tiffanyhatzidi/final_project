@@ -22,14 +22,6 @@ exports.upsert = async (ingredient) => {
     if(ingredient.id) {
         return exports.update(ingredient.ingredient, ingredient.id)
     }
-    return exports.create(ingredient.ingredient)
+    return exports.create(ingredient)
 }
 
-/*get for recipe, wait for recipe
-exports.allForRecipe = async (recipe) => {
-    const {rows} = await db.getPool().query
-    ('select ingredients.* from ingredients join ingredients_recipes on ingredients_recipes.ingredient_id where ingredients_recipes.recipe_id = $1;', 
-    [recipe.id]);
-    return db.camelize(rows);
-}
-*/

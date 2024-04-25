@@ -8,7 +8,7 @@ exports.all = async () => {
 exports.add = async (recipe) => {
     const {rows} = await db.getPool()
     .query("insert into recipes(recipe_name, time_taken, instructions, category) values($1, $2, $3, $4) returning *", 
-    [recipe.recipe_name, recipe.time_taken, recipe.instructions, recipe.category]);
+    [recipe.recipeName, recipe.timeTaken, recipe.instructions, recipe.category]);
     //may need to call upsert to ingredients_recipes depending
     return db.camelize(rows);
 }
@@ -21,12 +21,18 @@ exports.get = async (id) => {
   exports.update = async (recipe) => {
     const {rows} =  await db.getPool()
       .query("update recipes set recipe_name = $1, time_taken = $2, instructions = $3, category = $4 where id = $5 returning *",
-      [recipe.recipe_name, recipe.time_taken, recipe.instructions, recipe.category, recipe.id]);
+      [recipe.recipeName, recipe.timeTaken, recipe.instructions, recipe.category, recipe.id]);
       //update ingrecients-recipes 
       return db.camelize(rows)[0]
   }
 
   exports.upsert = async (recipe) => {
+    if (recipe.timeTaken) {
+      recipe.timeTaken = `${recipe.timeTaken} minutes`
+    }
+
+    console.log("=======", recipe)
+
     if (recipe.id) {
       return exports.update(recipe);
     } else {

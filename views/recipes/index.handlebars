@@ -3,5 +3,6 @@
 {{#each recipes}}
 <li>
     <a href="/recipes/show/{{this.id}}">{{this.id}}: {{this.recipeName}}</a>
+    <a href="/recipes/edit?id={{this.id}}">edit</a>
 </li>
 {{/each}}
