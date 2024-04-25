@@ -9,7 +9,6 @@ exports.add = async (recipe) => {
     const {rows} = await db.getPool()
     .query("insert into recipes(recipe_name, time_taken, instructions, category) values($1, $2, $3, $4) returning *", 
     [recipe.recipeName, recipe.timeTaken, recipe.instructions, recipe.category]);
-    //may need to call upsert to ingredients_recipes depending
     return db.camelize(rows);
 }
 

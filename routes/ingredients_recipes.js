@@ -17,7 +17,13 @@ router.post('/upsert', async (req, res, next) => {
     let recipeId = req.body.recipeId;
     let csrf = req.body.csrf;
     let redirect = `/ingredients_recipes/form?id=${recipeId}&csrf=${csrf}`;
-    await ingredientRecipe.upsert(req.body);
+    let tempBody = {
+        recipeId: req.body.recipeId,
+        ingredientId: req.body.ingredientId,
+        measurement: req.body.measurement
+    }
+    console.log("temp body: " + JSON.stringify(tempBody));
+    await ingredientRecipe.upsert(tempBody);
     req.session.flash = {
         type: 'info',
         intro: 'Success!',

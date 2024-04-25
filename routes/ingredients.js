@@ -19,7 +19,8 @@ router.get('/form', async (req, res, next) => {
 
 router.post('/upsert', async (req, res, next) => {
     console.log('upsert body: ' + JSON.stringify(req.body))
-    await ingredient.upsert(req.body);
+    //create temp body
+    await ingredient.upsert(req.body.ingredient);
     req.session.flash = {
         type: 'info',
         intro: 'Success!',
@@ -28,5 +29,6 @@ router.post('/upsert', async (req, res, next) => {
       res.redirect(303, '/ingredients')
 })
 
+//edit ingredients?
 
 module.exports = router;

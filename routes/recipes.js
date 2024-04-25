@@ -33,7 +33,15 @@ router.post('/upsert', async (req, res, next) => {
     // let ingredientsBody = {
     //     ??
     // }
-    await recipe.upsert(req.body);
+    let redirect;
+    if(req.body.id){
+        let newId = await recipe.upsert(req.body);
+        redirect = `/ingredients_recipes/form?id=${newId.id}`
+    } else {
+        let newId = await recipe.upsert(req.body);
+        redirect =`/ingredients_recipes/form?id=${newId[0].id}`
+    }
+    
     //await ingredient.upsert(req.body);
     //await ingredientRecipe.upsert(req.body);
     let createdOrupdated = req.body.id ? 'updated' : 'created';
@@ -42,7 +50,7 @@ router.post('/upsert', async (req, res, next) => {
       intro: 'Success!',
       message: `the Recipe has been ${createdOrupdated}!`,
     };
-    res.redirect(303, `/ingredients_recipes/form?id=${req.body.id}`)
+    res.redirect(303, redirect)
 })
 
 router.get('/edit', async(req, res, next) => {

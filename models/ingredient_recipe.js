@@ -2,24 +2,24 @@ const db = require('../database');
 const ingredient = require('./ingredient');
 
 exports.add = async (ingredientRecipe) => {
-    if(!ingredientRecipe.ingredientId){
-        let ingredientT = await ingredient.upsert(ingredientRecipe.ingredient) 
-        console.log(JSON.stringify(ingredientRecipe.recipeId))
-        console.log(JSON.stringify(ingredientT.rows[0].id));
-        console.log(JSON.stringify(ingredientRecipe.measurement));
-        return db.getPool()
-    .query(`
-        insert into ingredients_recipes(recipe_id, ingredient_id, 
-        measurement) values ($1, $2, $3) 
-        returing *`,
-    [ingredientRecipe.recipeId, ingredientT.rows[0].id, ingredientRecipe.measurement]);
-    }
+    // if(!ingredientRecipe.ingredientId){
+    //     let ingredientT = await ingredient.upsert(ingredientRecipe.ingredient) 
+    //     console.log(JSON.stringify(ingredientRecipe.recipeId))
+    //     console.log(JSON.stringify(ingredientT.rows[0].id));
+    //     console.log(JSON.stringify(ingredientRecipe.measurement));
+    //     return db.getPool()
+    // .query(`
+    //     insert into ingredients_recipes(recipe_id, ingredient_id, 
+    //     measurement) values ($1, $2, $3) 
+    //     returning *`,
+    // [ingredientRecipe.recipeId, ingredientT.rows[0].id, ingredientRecipe.measurement]);
+    // }
 
     return db.getPool()
     .query(`
         insert into ingredients_recipes(recipe_id, ingredient_id, 
         measurement) values ($1, $2, $3) 
-        returing *`,
+        returning *`,
     [ingredientRecipe.recipeId, ingredientRecipe.ingredientId, ingredientRecipe.measurement]);
 }
 
