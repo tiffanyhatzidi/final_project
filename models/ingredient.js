@@ -15,13 +15,13 @@ exports.create = async (ingredient) => {
 }
 
 exports.update = async (ingredient, id) => {
-    return db.getPool().query("update ingredients set ingredient $1 where id = $2 returning *", [ingredient, id]);
+    return db.getPool().query("update ingredients set ingredient = $1 where id = $2 returning *", [ingredient, id]);
 }
 
 exports.upsert = async (ingredient) => {
     if(ingredient.id) {
         return exports.update(ingredient.ingredient, ingredient.id)
     }
-    return exports.create(ingredient)
+    return exports.create(ingredient.ingredient)
 }
 

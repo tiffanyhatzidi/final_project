@@ -11,16 +11,20 @@ router.get('/', async (req, res, next) => {
 router.get('/form', async (req, res, next) => {
   let templateVars = { title: 'HalfBaked || Ingredients' }
   if (req.query.id) {
-    let ingredient = await ingredient.get(req.query.id)
-    if (ingredient) {templateVars['ingredients'] = ingredient}
+    let ingredient_ = await ingredient.get(req.query.id)
+    if (ingredient_) {templateVars['ingredient'] = ingredient_}
   }
   res.render('ingredients/form', templateVars);
 });
 
 router.post('/upsert', async (req, res, next) => {
     console.log('upsert body: ' + JSON.stringify(req.body))
-    //create temp body
-    await ingredient.upsert(req.body.ingredient);
+    let tempBody = {
+      ingredient: req.body.ingredient,
+      id: req.body.id
+    }
+    console.log(JSON.stringify(tempBody));
+    await ingredient.upsert(tempBody);
     req.session.flash = {
         type: 'info',
         intro: 'Success!',
