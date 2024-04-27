@@ -1,26 +1,26 @@
   <input type="hidden" name="recipeId" value="{{recipe.id}}">  
   {{log recipe.id}}
     <form method="post" action="/ingredients_recipes/upsert">
-    <h3>Ingredient &emsp;&emsp;&emsp;&emsp; Measurement</h3>
+      <h3>Measurement &emsp;&emsp;&emsp;&emsp; Ingredient</h3>
             {{#if ingredientsRecipe}}
             {{#each ingredientsRecipe}} {{!edit just measurement page ?}}
             {{log this}}
-            <li>{{this.ingredient}} {{this.measurement}} </li> <br>
+            <li>{{this.measurement}} {{this.ingredient}}</li> <br>
             {{/each}}
             {{/if}}
             <br>
             <div class="mb-3">
+            <input type="text" name="measurement">
             <select name="ingredientId" id="ingredientId">
                 {{#each ingredients}}
                 <option value="{{this.id}}">{{this.ingredient}}</option>  <br>{{!-- keep this --}}
                 {{/each}}
                 {{!-- <input type="hidden" name="ingredientId" value="{{ingredients.id}}"> --}}
             </select>
-            <input type="text" name="measurement">
             </div>
         <input type="hidden" name="recipeId" value="{{recipe.id}}">
         <input type="hidden" name="_csrf" value="{{_csrfToken}}">
-        <button type="submit" class="btn btn-primary">Add Ingredient</button> <br>
+        <button type="submit" class="btn btn-primary">Add Ingredient</button> <br><br>
         <a href="/recipes/show/{{recipe.id}}">Finish!</a>
     </form>
     

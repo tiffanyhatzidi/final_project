@@ -1,8 +1,11 @@
 <h1>Recipes</h1>
 <a href="/recipes/form">Add a New Recipe</a>
+<br><br>
+<table>
 {{#each recipes}}
-<li>
-    <a href="/recipes/show/{{this.id}}">{{this.id}}: {{this.recipeName}}</a>
-    <a href="/recipes/edit?id={{this.id}}">edit</a>
-</li>
+<tr>
+    <td><a href="/recipes/show/{{this.id}}">{{this.id}}: {{this.recipeName}}</a></td>
+    <td><a href="/recipes/edit?id={{this.id}}">edit</a></td>
+<tr>
 {{/each}}
+</table>

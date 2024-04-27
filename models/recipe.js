@@ -14,7 +14,7 @@ exports.add = async (recipe) => {
 
 exports.get = async (id) => {
     const { rows } = await db.getPool().query("select * from recipes where id = $1", [id])
-    return db.camelize(rows)[0]
+    return db.camelize(rows)[0];
   }
 
   exports.update = async (recipe) => {

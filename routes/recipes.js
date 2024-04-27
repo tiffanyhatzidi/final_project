@@ -33,6 +33,7 @@ router.post('/upsert', async (req, res, next) => {
     // let ingredientsBody = {
     //     ??
     // }
+    //await recipe.upsert(req.body);
     let redirect;
     if(req.body.id){
         let newId = await recipe.upsert(req.body);
