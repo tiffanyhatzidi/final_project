@@ -44,6 +44,20 @@ exports.allForRecipe = async (recipe) => {
     return db.camelize(rows);
 }
 
+exports.getConnect = async (recipeId, id) => {
+    const {rows} = await db.getPool()
+    .query(`
+    select ingredients.ingredient, ingredients_recipes.* 
+    from ingredients 
+    join ingredients_recipes on ingredients_recipes.ingredient_id = ingredients.id
+    where ingredients_recipes.recipe_id = $1
+    and ingredients_recipes.id = $2`, 
+    [recipeId, id]);
+    console.log("getConnect id" + JSON.stringify(id));
+    console.log("getConnect recid" + JSON.stringify(recipeId));
+    return db.camelize(rows)[0];
+}
+
 exports.update = async (ingredientRecipe) => {
     return await db.getPool()
     .query(
@@ -62,4 +76,16 @@ exports.upsert = (ingredientRecipe) => {
     } else {
         return exports.add(ingredientRecipe);
     }
+}
+
+exports.delete = async (id) => {
+    return await db.getPool()
+    .query(
+        `
+        delete from ingredients_recipes 
+        where ingredients_recipes.id = $1
+        returning *
+        `,
+        [id]
+    );
 }

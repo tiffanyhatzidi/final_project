@@ -24,16 +24,6 @@ router.get('/form', async (req, res, next) => {
 
 router.post('/upsert', async (req, res, next) => {
     console.log('upsert body: ' + JSON.stringify(req.body))
-    // let recipeBody = {
-    //     recipe_name:req.body.recipe_name,
-    //     time_taken: req.body.timeTaken,
-    //     category: req.body.category,
-    //     instructions: req.body.instructions
-    // }
-    // let ingredientsBody = {
-    //     ??
-    // }
-    //await recipe.upsert(req.body);
     let redirect;
     if(req.body.id){
         let newId = await recipe.upsert(req.body);
@@ -43,8 +33,6 @@ router.post('/upsert', async (req, res, next) => {
         redirect =`/ingredients_recipes/form?id=${newId[0].id}`
     }
     
-    //await ingredient.upsert(req.body);
-    //await ingredientRecipe.upsert(req.body);
     let createdOrupdated = req.body.id ? 'updated' : 'created';
     req.session.flash = {
       type: 'info',
@@ -56,9 +44,7 @@ router.post('/upsert', async (req, res, next) => {
 
 router.get('/edit', async(req, res, next) => {
     let recipeId = req.query.id;
-    //TODO: if recipe, recipe.
     let recipe_ = await recipe.get(recipeId);
-    //TODO: get ingredients
     res.render('recipes/form', 
         {title: 'HalfBaked || Recipes',
         recipeId: recipeId,
@@ -74,7 +60,7 @@ router.get('/show/:id', async (req, res, next) => {
         timeTaken: recipes.timeTaken,
         recipeId: req.params.id
     }
-    recipes.ingredients = await ingredientRecipe.get(recipes);
+    recipes.ingredients = await ingredientRecipe.allForRecipe(recipes);
 
     if(req.session.currentUser) {
         templateVars['recipeUser'] = await recipeUser.get(req.session.currentUser, recipes);
@@ -83,6 +69,7 @@ router.get('/show/:id', async (req, res, next) => {
     console.log(templateVars);
     res.render('recipes/show', templateVars);
 });
+
 
 
 

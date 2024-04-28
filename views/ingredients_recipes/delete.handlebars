@@ -1,0 +1,8 @@
+<form method="post" action="/ingredients_recipes/deleteIR/{{ingredientsRecipe.id}}">
+{{log ingredientsRecipe}}
+<h3>Are you sure you want to delete {{ingredientsRecipe.ingredient}}?</h3> 
+<br>
+<input type="hidden" name="recipeId" value="{{ingredientsRecipe.recipeId}}">
+<input type="hidden" name="_csrf" value="{{_csrfToken}}">
+<button type="submit" class="btn btn-primary">Yes</button>
+</form>

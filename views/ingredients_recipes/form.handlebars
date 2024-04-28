@@ -3,9 +3,9 @@
     <form method="post" action="/ingredients_recipes/upsert">
       <h3>Measurement &emsp;&emsp;&emsp;&emsp; Ingredient</h3>
             {{#if ingredientsRecipe}}
-            {{#each ingredientsRecipe}} {{!edit just measurement page ?}}
+            {{#each ingredientsRecipe}} 
             {{log this}}
-            <li>{{this.measurement}} {{this.ingredient}}</li> <br>
+            <li>{{this.measurement}} {{this.ingredient}} <a href="/ingredients_recipes/delete?id={{this.id}}&recipeId={{this.recipeId}}">delete</a><br>
             {{/each}}
             {{/if}}
             <br>
@@ -13,9 +13,8 @@
             <input type="text" name="measurement">
             <select name="ingredientId" id="ingredientId">
                 {{#each ingredients}}
-                <option value="{{this.id}}">{{this.ingredient}}</option>  <br>{{!-- keep this --}}
+                <option value="{{this.id}}">{{this.ingredient}}</option>  <br>
                 {{/each}}
-                {{!-- <input type="hidden" name="ingredientId" value="{{ingredients.id}}"> --}}
             </select>
             </div>
         <input type="hidden" name="recipeId" value="{{recipe.id}}">

@@ -44,4 +44,25 @@ router.get('/form', async(req, res, next) => {
         ingredientsRecipe: ingredientsRecipe})
 })
 
+router.get('/delete', async(req, res, next) => {
+    console.log(JSON.stringify(req.query))
+    let ingRecId = req.query.id;
+    let recipeId = req.query.recipeId;
+    let ingredientsRecipe = await ingredientRecipe.getConnect(recipeId, ingRecId); 
+    console.log("ing rec await: " + JSON.stringify(ingredientsRecipe))
+    res.render('ingredients_recipes/delete', {
+        title: 'HalfBaked || Delete?',
+        ingredientsRecipe: ingredientsRecipe
+    })
+})
+
+router.post('/deleteIR/:id', async(req, res, next) => {
+   let ingResId = req.params.id
+   await ingredientRecipe.delete(ingResId);
+   let recipeId = req.body.recipeId;
+   let csrf = req.body._csrf;
+   let redirect = `/ingredients_recipes/form?id=${recipeId}&csrf=${csrf}`;
+   res.redirect(303, redirect);
+});
+
 module.exports = router;
