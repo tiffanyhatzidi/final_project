@@ -17,6 +17,7 @@ CREATE TABLE "recipe" (
   "recipe_name" varchar,
   "instructions" varchar,
   "time_taken" interval,
+  "category" varchar,
   PRIMARY KEY ("id")
 );
 

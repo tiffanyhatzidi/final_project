@@ -6,10 +6,11 @@ insert into ingredients (ingredient) values ('oregano');
 insert into ingredients (ingredient) values ('olive oil');
 insert into ingredients (ingredient) values ('balsamic vinaigrette');
 
-insert into recipes (recipe_name, instructions, time_taken) 
+insert into recipes (recipe_name, instructions, time_taken, category) 
     values ('dakos salad',
              '1. Start by soaking the rusks in water to soften them as needed. \n 2. Then cut the rusks and tomatoes into bite size chunks. \n 3. Pit the olives as needed and cut into small pieces. crumble the feta on top and mix all together with the remaining ingredients as desired.',
-             interval '10 minutes');
+             interval '10 minutes',
+             'Lunch');
 
 insert into ingredients_recipes values (default, (select id from recipes where recipe_name = 'dakos salad'),
                                         (select id from ingredients where ingredient = 'barley rusks'), 
